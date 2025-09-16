@@ -153,7 +153,7 @@ let connectingFrom = null;
 
 window.onresize = function() {
   canvas.width = window.innerWidth - 200;
-  canvas.height = window.innerHeight-250;
+  canvas.height = window.innerHeight-300;
 };
 window.onresize();
 canvas.oncontextmenu = function(e) {
