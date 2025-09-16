@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Electronics Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Digital Electronics Simulator</h1>
+  <div id="toolbar">
+    <button onclick="addGate('AND')">AND</button>
+    <button onclick="addGate('OR')">OR</button>
+    <button onclick="addGate('NOT')">NOT</button>
+    <button onclick="addGate('NAND')">NAND</button>
+    <button onclick="addGate('NOR')">NOR</button>
+    <button onclick="addGate('XOR')">XOR</button>
+    <button onclick="addGate('XNOR')">XNOR</button>
+  </div>
+  <canvas id="workspace" width="1000" height="600"></canvas>
+  <p style="text-align:center">Tip: Drag gates to move them. Click input nodes to toggle. Drag from output node to input node to wire.</p>
+  <script src="main.js"></script>
+</body>
+</html>
