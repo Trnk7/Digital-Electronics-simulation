@@ -49,6 +49,17 @@ class LogicGate {
     }
   }
 
+  drawOrGate(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
+    ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
+    ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+
   draw(ctx) {
     ctx.save();
     ctx.translate(this.x, this.y);
@@ -70,12 +81,9 @@ class LogicGate {
         ctx.stroke();
         break;
       case 'OR':
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
-        ctx.closePath();
+        this.drawOrGate(ctx);
+        break;
+      case 'NOT':
         ctx.fill();
         ctx.stroke();
         break;
@@ -95,14 +103,7 @@ class LogicGate {
         break;
       case 'NAND':
         // Draw AND gate first
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(this.width / 2, 0);
-        ctx.arc(this.width / 2, this.height / 2, this.height / 2, -Math.PI / 2, Math.PI / 2);
-        ctx.lineTo(0, this.height);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+        this.drawAndGate(ctx);
         // Inversion circle
         ctx.beginPath();
         ctx.arc(this.width + 5, this.height / 2, 5, 0, 2 * Math.PI);
@@ -112,13 +113,9 @@ class LogicGate {
       case 'NOR':
         // Draw OR gate first
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+      case 'NOR':
+        // Draw OR gate first
+        this.drawOrGate(ctx);
         // Inversion circle
         ctx.beginPath();
         ctx.arc(this.width + 5, this.height / 2, 5, 0, 2 * Math.PI);
@@ -127,14 +124,7 @@ class LogicGate {
         break;
       case 'XOR':
         // Draw OR gate first
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+        this.drawOrGate(ctx);
         // Extra curve for XOR
         ctx.beginPath();
         ctx.moveTo(-5, 0);
@@ -143,14 +133,7 @@ class LogicGate {
         break;
       case 'XNOR':
         // Draw XOR gate first
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
-        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+        this.drawOrGate(ctx);
         // Extra curve for XOR
         ctx.beginPath();
         ctx.moveTo(-5, 0);
@@ -162,9 +145,6 @@ class LogicGate {
         ctx.fill();
         ctx.stroke();
         break;
-      case 'IN':
-        ctx.fillStyle = this.output ? "#27ae60" : "#e74c3c";
-        ctx.fillRect(0, 0, this.width, this.height);
         ctx.strokeRect(0, 0, this.width, this.height);
         break;
       case 'OUT':
