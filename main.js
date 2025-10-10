@@ -13,8 +13,8 @@ class LogicGate {
       this.output = 0;
     }
     this.output = 0;
-    this.width = 80;
-    this.height = 50;
+    this.width = 40;
+    this.height = 25;
     this.selected = false;
   }
 
@@ -57,8 +57,126 @@ class LogicGate {
     ctx.fillStyle = this.selected ? "#3498db" : "#ddd";
     ctx.strokeStyle = "#333";
     ctx.lineWidth = 2;
-    ctx.fillRect(0, 0, this.width, this.height);
-    ctx.strokeRect(0, 0, this.width, this.height);
+    
+    switch (this.type) {
+      case 'AND':
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(this.width / 2, 0);
+        ctx.arc(this.width / 2, this.height / 2, this.height / 2, -Math.PI / 2, Math.PI / 2);
+        ctx.lineTo(0, this.height);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'OR':
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'NOT':
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(this.width - 10, this.height / 2);
+        ctx.lineTo(0, this.height);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Inversion circle
+        ctx.beginPath();
+        ctx.arc(this.width - 5, this.height / 2, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'NAND':
+        // Draw AND gate first
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(this.width / 2, 0);
+        ctx.arc(this.width / 2, this.height / 2, this.height / 2, -Math.PI / 2, Math.PI / 2);
+        ctx.lineTo(0, this.height);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Inversion circle
+        ctx.beginPath();
+        ctx.arc(this.width + 5, this.height / 2, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'NOR':
+        // Draw OR gate first
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Inversion circle
+        ctx.beginPath();
+        ctx.arc(this.width + 5, this.height / 2, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'XOR':
+        // Draw OR gate first
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Extra curve for XOR
+        ctx.beginPath();
+        ctx.moveTo(-5, 0);
+        ctx.quadraticCurveTo(this.width / 4 - 5, this.height / 2, -5, this.height);
+        ctx.stroke();
+        break;
+      case 'XNOR':
+        // Draw XOR gate first
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.width / 4, this.height / 2, 0, this.height);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, this.width, this.height / 2);
+        ctx.quadraticCurveTo(this.width / 2, this.height / 2, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Extra curve for XOR
+        ctx.beginPath();
+        ctx.moveTo(-5, 0);
+        ctx.quadraticCurveTo(this.width / 4 - 5, this.height / 2, -5, this.height);
+        ctx.stroke();
+        // Inversion circle
+        ctx.beginPath();
+        ctx.arc(this.width + 5, this.height / 2, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'IN':
+        ctx.fillStyle = this.output ? "#27ae60" : "#e74c3c";
+        ctx.fillRect(0, 0, this.width, this.height);
+        ctx.strokeRect(0, 0, this.width, this.height);
+        break;
+      case 'OUT':
+        ctx.fillStyle = "#ddd";
+        ctx.fillRect(0, 0, this.width, this.height);
+        ctx.strokeRect(0, 0, this.width, this.height);
+        break;
+      default:
+        ctx.fillStyle = "#ddd";
+        ctx.fillRect(0, 0, this.width, this.height);
+        ctx.strokeRect(0, 0, this.width, this.height);
+    }
 
     // Gate type text
     ctx.fillStyle = "#333";
