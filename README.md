@@ -1,1 +1,1 @@
-# Digital-Electronics-simulation
+#logic gates simulator
