@@ -186,19 +186,6 @@ class LogicGate {
       ctx.fillText(this.inputs[0] ? "HIGH" : "LOW", this.width/2 -15, 30);
     }
 
-    // Inputs
-    ctx.beginPath();
-    let inputY = (this.height) / (this.inputs.length + 1);
-    for (let i = 0; i < this.inputs.length; i++) {
-      ctx.beginPath();
-      ctx.arc(0, inputY*(i+1)+4*i, 8, 0, 2 * Math.PI);
-      ctx.fillStyle = this.inputs[i] ? "#27ae60" : "#e74c3c";
-      ctx.fill();
-      ctx.stroke();
-      
-    }
-
-    
     ctx.restore();
   }
 }
