@@ -50,7 +50,7 @@ class LogicGate {
   }
   drawInputs(ctx) {
     // input
-    if(this.type === 'IN' || this.type === 'OUT') return;
+    if( this.type === 'OUT') return;
     ctx.beginPath();
     let inputY = (this.height) / (this.inputs.length + 1);
     for (let i = 0; i < this.inputs.length; i++) {
