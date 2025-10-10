@@ -1,1 +1,1 @@
-#logic gates simulator
+# logic gates simulator
