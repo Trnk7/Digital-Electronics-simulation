@@ -145,6 +145,9 @@ class LogicGate {
         ctx.fill();
         ctx.stroke();
         break;
+      case 'IN':
+        ctx.fillStyle = "#ddd";
+        ctx.fillRect(0, 0, this.width, this.height);
         ctx.strokeRect(0, 0, this.width, this.height);
         break;
       case 'OUT':
@@ -174,7 +177,7 @@ class LogicGate {
     let inputY = (this.height) / (this.inputs.length + 1);
     for (let i = 0; i < this.inputs.length; i++) {
       ctx.beginPath();
-      ctx.arc(0, inputY*(i+1)+4*i, 8, 0, 2 * Math.PI);
+      ctx.arc(0, inputY*(i+1), 10, 0, 2 * Math.PI);
       ctx.fillStyle = this.inputs[i] ? "#27ae60" : "#e74c3c";
       ctx.fill();
       ctx.stroke();
@@ -271,7 +274,7 @@ canvas.addEventListener('mousedown', function(e) {
     let outX = gate.x + gate.width;
     let outY = gate.y + gate.height / 2;
     let outDist = Math.sqrt((mouse.x - outX) ** 2 + (mouse.y - outY) ** 2);
-    if (outDist < 12) {
+    if (outDist < 10) {
       if(mouse.button === 2){
         wires = wires.filter(w => w.from !== gate);
       }
