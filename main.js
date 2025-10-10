@@ -13,8 +13,8 @@ class LogicGate {
       this.output = 0;
     }
     this.output = 0;
-    this.width = 40;
-    this.height = 25;
+    this.width = 80;
+    this.height = 50;
     this.selected = false;
   }
 
